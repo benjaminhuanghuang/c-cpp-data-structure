@@ -31,6 +31,12 @@ void Print(struct Node *head) {
 
 void Delete(struct Node *head, int n) {
   struct Node *tmp1 = head;
+  if(n ==1) {
+    head = tmp1->next;
+    free(tmp1);
+    return;
+  }
+  
   for(int i =0; i< n-2; i++){
     tmp1 = tmp1->next;
   }
@@ -38,6 +44,51 @@ void Delete(struct Node *head, int n) {
   struct Node *tmp2 = tmp1->next;
   tmp1->next = tmp2->next;
   free(tmp2);
+}
+
+void Reserve(struct Node **head) {
+  struct Node *current, *prev, *next;
+
+  current = *head;
+  prev = NULL;
+
+  while(current != NULL) {
+    next = current->next;
+    current->next = prev;
+    prev = current;
+    current = next;
+  }
+  *head = prev;
+}
+
+void Reverse(struct Node **head) {
+  struct Node *current, *prev, *next;
+
+  current = *head;
+  prev = NULL;
+
+  while(current != NULL) {
+    next = current->next;
+    current->next = prev;
+    prev = current;
+    current = next;
+  }
+  *head = prev;
+}
+
+
+void ReverseRecusion(struct Node *p)
+{
+  if(p->next == NULL)
+  {
+    head = p;
+    return;
+  } 
+  Reverse(p->next); 
+
+  struct Node *q = p->next;
+  q->next = p;
+  p->next = null;
 }
 
 int main()
